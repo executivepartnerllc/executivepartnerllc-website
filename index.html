@@ -331,10 +331,16 @@
             line-height: 1.75;
             opacity: 0;
             animation: riseIn 1.6s ease 2.8s forwards;
-            margin-bottom: 50px;
+            margin-bottom: 0;
         }
 
         .hero-btn-wrap {
+            position: absolute;
+            bottom: 208px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 7;
+            white-space: nowrap;
             opacity: 0;
             animation: riseIn 1s ease 3.6s forwards;
         }
@@ -347,7 +353,7 @@
         /* Scroll hint */
         .scroll-hint {
             position: absolute;
-            bottom: 210px;
+            bottom: 270px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 7;
@@ -1087,9 +1093,11 @@
             We handle Finance, HR, Operations, Sales &amp; more —<br>
             so you can focus on what you do best.
         </p>
-        <div class="hero-btn-wrap">
-            <a href="#builder" class="btn-hero">Build My Team &rarr;</a>
-        </div>
+    </div>
+
+    <!-- Build My Team button — pinned just above the reel -->
+    <div class="hero-btn-wrap">
+        <a href="#builder" class="btn-hero">Build My Team &rarr;</a>
     </div>
 
     <!-- Speaker toggle -->
@@ -1583,12 +1591,4 @@ function toggleAudio() {
     const btn = document.getElementById('speakerBtn');
     if (!vid) return;
     vid.muted = !vid.muted;
-    btn.textContent = vid.muted ? '🔇' : '🔊';
-}
-
-// ── INIT ────────────────────────────────────────────────────
-buildReel();
-buildCats();
-</script>
-</body>
-</html>
+    btn.textContent = vid.muted ? '🔇' : '�
