@@ -1073,7 +1073,7 @@
 <body>
 
 <!-- ── CINEMA GATE ────────────────────────────────────────── -->
-<button id="cinema-gate" type="button">
+<button id="cinema-gate" type="button" onclick="enterCinema()">
     <div class="gate-logo">Executive Partner LLC</div>
     <div class="gate-enter">
         <div class="gate-circle">
@@ -1424,10 +1424,14 @@ function goGetStarted() {
 }
 
 // ── CINEMATIC CANVAS BACKGROUND ─────────────────────────────
-const canvas = document.getElementById('cinemaCanvas');
-const ctx = canvas.getContext('2d');
+let canvas, ctx;
+try {
+    canvas = document.getElementById('cinemaCanvas');
+    ctx    = canvas ? canvas.getContext('2d') : null;
+} catch(e) { canvas = null; ctx = null; }
 
 function resizeCanvas() {
+    if (!canvas) return;
     canvas.width  = window.innerWidth;
     canvas.height = window.innerHeight;
 }
@@ -1533,15 +1537,20 @@ class Sparkle {
     }
 }
 
-// Initialize particles
-const bokehArr    = Array.from({length: 28}, () => new Bokeh());
-const rayArr      = Array.from({length: 5},  () => new LightRay());
-const sparkleArr  = Array.from({length: 90}, () => new Sparkle());
+// Initialize particles — guarded so canvas errors don't kill the gate
+let bokehArr = [], rayArr = [], sparkleArr = [];
+try {
+    if (canvas && ctx) {
+        bokehArr   = Array.from({length: 28}, () => new Bokeh());
+        rayArr     = Array.from({length: 5},  () => new LightRay());
+        sparkleArr = Array.from({length: 90}, () => new Sparkle());
+    }
+} catch(e) {}
 
 let canvasRunning = false;
 
 function animateCanvas() {
-    if (!canvasRunning) return;
+    if (!canvasRunning || !canvas || !ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     // Canvas is transparent — video shows through, we only draw bokeh/sparkles on top
     rayArr.forEach(r => { r.update(); r.draw(); });
@@ -1590,10 +1599,36 @@ function enterCinema() {
     }
 }
 
-// Attach gate events — button element handles click natively across all browsers
-// pointerdown fires on mouse, touch, and stylus — most universal event
+// Attach gate events -- button element handles click natively across all browsers
+// pointerdown fires on mouse, touch, and stylus -- most universal event
 (function attachGate() {
     const gate = document.getElementById('cinema-gate');
     if (!gate) return;
 
-    // pointerdown: fires immediately on any input type (mo
+    // pointerdown: fires immediately on any input type (most reliable)
+    gate.addEventListener('pointerdown', function(e) {
+        e.preventDefault();
+        enterCinema();
+    });
+
+    // click: fallback for browsers without Pointer Events support
+    gate.addEventListener('click', function() {
+        enterCinema();
+    });
+}());
+
+// -- SPEAKER TOGGLE --
+function toggleAudio() {
+    const vid = document.getElementById('bgVideo');
+    const btn = document.getElementById('speakerBtn');
+    if (!vid) return;
+    vid.muted = !vid.muted;
+    btn.textContent = vid.muted ? '🔇' : '🔊';
+}
+
+// -- INIT --
+buildReel();
+buildCats();
+</script>
+</body>
+</html>�
