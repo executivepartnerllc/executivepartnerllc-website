@@ -1043,7 +1043,7 @@
 <body>
 
 <!-- ── CINEMA GATE ────────────────────────────────────────── -->
-<div id="cinema-gate" onclick="enterCinema()">
+<div id="cinema-gate" onclick="enterCinema()" ontouchstart="enterCinema()">
     <div class="gate-logo">Executive Partner LLC</div>
     <div class="gate-enter">
         <div class="gate-circle">
@@ -1520,25 +1520,22 @@ function animateCanvas() {
 
 
 // ── ENTER CINEMA ─────────────────────────────────────────────
+let cinemaEntered = false;
 function enterCinema() {
+    if (cinemaEntered) return;   // prevent double-fire on touch devices
+    cinemaEntered = true;
+
     const gate = document.getElementById('cinema-gate');
     gate.classList.add('fade-out');
 
-    // Unmute and ensure video is playing
+    // Unmute and play — wrapped in try/catch (iOS Safari blocks volume changes)
     const vid = document.getElementById('bgVideo');
     if (vid) {
-        vid.muted = false;
-        vid.volume = 0.55;
-        vid.play().catch(() => { vid.muted = true; vid.play(); });
+        try { vid.muted = false; } catch(e) {}
+        vid.play().catch(() => {
+            try { vid.muted = true; } catch(e) {}
+            vid.play().catch(() => {});
+        });
     }
 
-    // Start canvas bokeh overlay
-    canvasRunning = true;
-    animateCanvas();
-
-
-    // Remove gate from DOM after fade
-    setTimeout(() => gate.remove(), 2000);
-}
-
-// ── SPEAKER TOGGLE ───────────────────────
+    
