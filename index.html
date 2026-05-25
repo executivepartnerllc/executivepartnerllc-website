@@ -26,6 +26,26 @@
             -webkit-tap-highlight-color: transparent;
             user-select: none;
             -webkit-user-select: none;
+            /* button reset */
+            border: none;
+            outline: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            font-family: inherit;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .gate-version {
+            position: absolute;
+            bottom: 20px;
+            right: 24px;
+            font-size: 0.6rem;
+            color: rgba(255,255,255,0.12);
+            letter-spacing: 0.1em;
+            font-family: 'Inter', sans-serif;
         }
 
         #cinema-gate.fade-out {
@@ -1053,7 +1073,7 @@
 <body>
 
 <!-- ── CINEMA GATE ────────────────────────────────────────── -->
-<div id="cinema-gate">
+<button id="cinema-gate" type="button">
     <div class="gate-logo">Executive Partner LLC</div>
     <div class="gate-enter">
         <div class="gate-circle">
@@ -1062,7 +1082,8 @@
         <div class="gate-label">Enter Experience</div>
     </div>
     <div class="gate-tagline">"Every great business has a story. Yours starts here."</div>
-</div>
+    <div class="gate-version">v7</div>
+</button>
 
 <!-- ── NAVIGATION ────────────────────────────────────────── -->
 <nav>
@@ -1569,26 +1590,10 @@ function enterCinema() {
     }
 }
 
-// Attach gate events — addEventListener is more reliable than inline handlers
-// touchend + preventDefault stops iOS from generating a ghost click after touch
+// Attach gate events — button element handles click natively across all browsers
+// pointerdown fires on mouse, touch, and stylus — most universal event
 (function attachGate() {
     const gate = document.getElementById('cinema-gate');
     if (!gate) return;
 
-    gate.addEventListener('touchend', function(e) {
-        e.preventDefault();  // stops the 300ms ghost click on iOS Safari
-        enterCinema();
-    }, { passive: false });
-
-    gate.addEventListener('click', function() {
-        enterCinema();       // desktop fallback
-    });
-}());
-
-// ── SPEAKER TOGGLE ──────────────────────────────────────────
-function toggleAudio() {
-    const vid = document.getElementById('bgVideo');
-    const btn = document.getElementById('speakerBtn');
-    if (!vid) return;
-    vid.muted = !vid.muted;
-    btn.textContent = vid.muted ? '🔇' : '�
+    // pointerdown: fires immediately on any input type (mo
