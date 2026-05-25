@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Partner LLC — Your Executive Partner for Business Excellence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* ── CINEMA GATE ──────────────────────────────────── */
+        #cinema-gate {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: opacity 1.4s ease;
+        }
+
+        #cinema-gate.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .gate-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+            margin-bottom: 60px;
+        }
+
+        .gate-enter {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            animation: gatePulse 2.4s ease infinite;
+        }
+
+        .gate-circle {
+            width: 88px; height: 88px;
+            border-radius: 50%;
+            border: 1px solid rgba(184,151,58,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(184,151,58,0.07);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .gate-circle::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 1px solid rgba(184,151,58,0.15);
+            animation: ringPulse 2s ease infinite;
+        }
+
+        .gate-play {
+            width: 0; height: 0;
+            border-top: 14px solid transparent;
+            border-bottom: 14px solid transparent;
+            border-left: 22px solid rgba(184,151,58,0.9);
+            margin-left: 5px;
+        }
+
+        .gate-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.45);
+        }
+
+        @keyframes gatePulse {
+            0%,100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.04); }
+        }
+
+        @keyframes ringPulse {
+            0%   { transform: scale(1); opacity: 0.4; }
+            100% { transform: scale(1.7); opacity: 0; }
+        }
+
+        .gate-tagline {
+            position: absolute;
+            bottom: 60px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+            color: rgba(255,255,255,0.18);
+            letter-spacing: 0.04em;
+        }
+
+        :root {
+            --black: #000000;
+            --dark: #080808;
+            --gold: #b8973a;
+            --gold-light: #d4af5a;
+            --glass-bg: rgba(255,255,255,0.04);
+            --glass-border: rgba(255,255,255,0.08);
+            --white: #ffffff;
+            --muted: rgba(255,255,255,0.55);
+            --green: #5fba7d;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ── NAVIGATION ────────────────────────────────── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 200;
+            padding: 18px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(24px);
+            background: rgba(0,0,0,0.4);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            padding: 9px 22px;
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 50px;
+            background: rgba(255,255,255,0.03);
+            background-image: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, transparent 100%);
+            color: rgba(255,255,255,0.9);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--white); }
+
+        .nav-cta {
+            padding: 10px 26px !important;
+            border: 1px solid rgba(184,151,58,0.35) !important;
+            border-radius: 50px;
+            color: var(--gold-light) !important;
+            background: rgba(184,151,58,0.08);
+            transition: all 0.3s !important;
+        }
+
+        .nav-cta:hover {
+            background: rgba(184,151,58,0.18) !important;
+            color: #fff !important;
+        }
+
+        /* ── SECTION 1: CINEMATIC INTRO ────────────────── */
+        #intro {
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background video */
+        #bgVideo {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            object-fit: cover;
+            object-position: center center;
+            z-index: 0;
+        }
+
+        /* Speaker toggle button */
+        #speakerBtn {
+            position: absolute;
+            bottom: 28px;
+            right: 28px;
+            z-index: 20;
+            width: 46px; height: 46px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.18);
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: border-color 0.3s, background 0.3s;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.75);
+            user-select: none;
+        }
+
+        #speakerBtn:hover {
+            border-color: rgba(184,151,58,0.5);
+            background: rgba(0,0,0,0.65);
+            color: #fff;
+        }
+
+        /* Cinematic canvas overlay (bokeh + sparkles on top of video) */
+        #cinemaCanvas {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .intro-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.78) 100%);
+            z-index: 1;
+        }
+
+        .vignette {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, transparent 20%, rgba(0,0,0,0.88) 100%);
+            z-index: 2;
+        }
+
+        /* Film grain */
+        .grain {
+            position: absolute;
+            inset: 0;
+            opacity: 0.028;
+            z-index: 3;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+            animation: grain 0.4s steps(1) infinite;
+        }
+
+        @keyframes grain {
+            0%   { transform: translate(0,0); }
+            20%  { transform: translate(-2%,-2%); }
+            40%  { transform: translate(2%,1%); }
+            60%  { transform: translate(-1%,3%); }
+            80%  { transform: translate(1%,-2%); }
+            100% { transform: translate(0,0); }
+        }
+
+        /* Gold ambient glow top center */
+        .intro-glow {
+            position: absolute;
+            width: 700px; height: 400px;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            background: radial-gradient(ellipse, rgba(184,151,58,0.06) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+
+        .cinematic-text {
+            position: relative;
+            z-index: 6;
+            max-width: 920px;
+            padding: 0 40px;
+        }
+
+        .in-a-world {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+            font-style: italic;
+            color: var(--muted);
+            letter-spacing: 0.04em;
+            opacity: 0;
+            animation: riseIn 1.6s ease 0.6s forwards;
+            margin-bottom: 22px;
+        }
+
+        .hero-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 6.5vw, 5.2rem);
+            font-weight: 700;
+            line-height: 1.08;
+            opacity: 0;
+            animation: riseIn 1.6s ease 1.8s forwards;
+            margin-bottom: 26px;
+            background: linear-gradient(160deg, #ffffff 0%, rgba(255,255,255,0.75) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: clamp(1rem, 1.8vw, 1.2rem);
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.75;
+            opacity: 0;
+            animation: riseIn 1.6s ease 2.8s forwards;
+            margin-bottom: 50px;
+        }
+
+        .hero-btn-wrap {
+            opacity: 0;
+            animation: riseIn 1s ease 3.6s forwards;
+        }
+
+        @keyframes riseIn {
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scroll hint */
+        .scroll-hint {
+            position: absolute;
+            bottom: 210px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            animation: riseIn 1s ease 4.4s forwards;
+        }
+
+        .scroll-hint span {
+            font-size: 0.68rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 44px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.4), transparent);
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+        /* ── FILM REEL ──────────────────────────────────── */
+        .reel-container {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 195px;
+            overflow: hidden;
+            z-index: 4;
+        }
+
+        /* fade edges */
+        .reel-container::before,
+        .reel-container::after {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 130px;
+            z-index: 2;
+        }
+        .reel-container::before { left:0;  background: linear-gradient(90deg, #000, transparent); }
+        .reel-container::after  { right:0; background: linear-gradient(-90deg, #000, transparent); }
+
+        /* sprocket holes strip */
+        .reel-strip-bg {
+            position: absolute;
+            inset: 0;
+            background: rgba(10,10,10,0.6);
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .sprockets {
+            position: absolute;
+            left: 0; right: 0;
+            height: 16px;
+            display: flex;
+            gap: 0;
+        }
+        .sprockets.top { top: 8px; }
+        .sprockets.bottom { bottom: 8px; }
+
+        .sprocket-hole {
+            width: 20px; height: 14px;
+            border-radius: 3px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(0,0,0,0.8);
+            margin: 0 18px;
+            flex-shrink: 0;
+        }
+
+        .reel-scroll {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            width: max-content;
+            animation: reelMove 28s linear infinite;
+            padding-top: 0;
+        }
+
+        @keyframes reelMove {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .film-frame {
+            width: 126px;
+            height: 148px;
+            margin: 0 6px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 4px;
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .film-frame::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 60%);
+        }
+
+        .film-frame:hover {
+            border-color: rgba(184,151,58,0.35);
+            box-shadow: 0 0 18px rgba(184,151,58,0.12);
+        }
+
+        .frame-icon { font-size: 2.6rem; margin-bottom: 8px; }
+
+        .frame-label {
+            font-size: 0.6rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-align: center;
+            padding: 0 8px;
+        }
+
+        /* ── SECTION 2: MONEY HOOK ──────────────────────── */
+        #value-prop {
+            padding: 130px 60px 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-glow {
+            position: absolute;
+            width: 600px; height: 350px;
+            top: 50%; left: 50%;
+            transform: translate(-50%,-50%);
+            background: radial-gradient(ellipse, rgba(184,151,58,0.055) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .section-eyebrow {
+            display: inline-block;
+            font-size: 0.72rem;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            margin-bottom: 22px;
+        }
+
+        .value-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4.5vw, 3.6rem);
+            font-weight: 700;
+            line-height: 1.15;
+            max-width: 860px;
+            margin: 0 auto 22px;
+        }
+
+        .value-headline .gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .value-sub {
+            font-size: 1.1rem;
+            color: var(--muted);
+            max-width: 580px;
+            margin: 0 auto 64px;
+            line-height: 1.75;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            margin-bottom: 64px;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 38px 48px;
+            min-width: 190px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 60%);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(184,151,58,0.3);
+            box-shadow: 0 12px 40px rgba(184,151,58,0.08), inset 0 1px 0 rgba(255,255,255,0.08);
+        }
+
+        .stat-number {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 6px;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        /* ── SECTION 3: SERVICE BUILDER ─────────────────── */
+        #builder {
+            padding: 80px 60px 130px;
+            max-width: 1240px;
+            margin: 0 auto;
+        }
+
+        .builder-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 3.8vw, 3rem);
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            color: var(--muted);
+            font-size: 1rem;
+            max-width: 540px;
+            margin: 0 auto;
+            line-height: 1.75;
+        }
+
+        .builder-grid {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 36px;
+            align-items: start;
+        }
+
+        /* Category cards */
+        .cats {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 16px;
+        }
+
+        .cat-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+
+        .cat-card.open {
+            border-color: rgba(184,151,58,0.22);
+        }
+
+        .cat-header {
+            padding: 18px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+        }
+
+        .cat-header:hover { background: rgba(255,255,255,0.025); }
+
+        .cat-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+
+        .cat-ico { font-size: 1.25rem; }
+
+        .cat-chevron {
+            color: var(--muted);
+            font-size: 0.75rem;
+            transition: transform 0.3s;
+        }
+
+        .cat-card.open .cat-chevron { transform: rotate(180deg); }
+
+        .svc-list {
+            display: none;
+            padding: 0 22px 16px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .cat-card.open .svc-list { display: block; }
+
+        .svc-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 13px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            cursor: pointer;
+            transition: padding-left 0.2s;
+        }
+
+        .svc-item:last-child { border-bottom: none; }
+        .svc-item:hover { padding-left: 5px; }
+
+        .svc-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .svc-check {
+            width: 18px; height: 18px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: transparent;
+        }
+
+        .svc-item.picked .svc-check {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            border-color: var(--gold);
+            color: #000;
+        }
+
+        .svc-name {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.8);
+            transition: color 0.2s;
+        }
+
+        .svc-item.picked .svc-name { color: var(--white); }
+
+        .svc-price {
+            font-size: 0.8rem;
+            color: var(--gold-light);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* Price panel */
+        .price-panel {
+            position: sticky;
+            top: 90px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(24px);
+        }
+
+        .panel-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            margin-bottom: 6px;
+        }
+
+        .panel-sub {
+            font-size: 0.78rem;
+            color: var(--muted);
+            margin-bottom: 22px;
+            line-height: 1.55;
+        }
+
+        .picked-list { min-height: 80px; margin-bottom: 20px; }
+
+        .picked-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 9px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.82rem;
+        }
+
+        .picked-row .pname { color: rgba(255,255,255,0.72); }
+        .picked-row .pprice { color: var(--gold-light); }
+
+        .empty-msg {
+            text-align: center;
+            padding: 28px 0;
+            color: var(--muted);
+            font-size: 0.82rem;
+            line-height: 1.7;
+        }
+
+        .hr { height: 1px; background: rgba(255,255,255,0.07); margin: 18px 0; }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 6px;
+        }
+
+        .total-lbl {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--muted);
+        }
+
+        .total-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.1rem;
+            background: linear-gradient(135deg, #fff, var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .savings-line {
+            font-size: 0.75rem;
+            color: var(--green);
+            text-align: right;
+            margin-bottom: 22px;
+            min-height: 1.2em;
+        }
+
+        /* Buttons */
+        .btn-gold {
+            display: block;
+            width: 100%;
+            padding: 14px 0;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: #000;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-gold::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.18), transparent);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 32px rgba(184,151,58,0.28);
+        }
+
+        .btn-clear {
+            display: block;
+            width: 100%;
+            padding: 12px 0;
+            background: transparent;
+            color: var(--muted);
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        .btn-clear:hover {
+            color: var(--white);
+            border-color: rgba(255,255,255,0.25);
+        }
+
+        .panel-note {
+            font-size: 0.68rem;
+            color: rgba(255,255,255,0.28);
+            text-align: center;
+            margin-top: 14px;
+            line-height: 1.6;
+        }
+
+        /* ── SECTION 4: FINAL CTA ────────────────────────── */
+        #cta {
+            padding: 130px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-glow {
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 50% 60%, rgba(184,151,58,0.07) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+            line-height: 1.15;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .cta-sub {
+            color: var(--muted);
+            font-size: 1.05rem;
+            max-width: 480px;
+            margin: 0 auto 52px;
+            line-height: 1.75;
+            position: relative;
+        }
+
+        .cta-btns {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .btn-large-gold {
+            padding: 17px 50px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: #000;
+            font-weight: 700;
+            font-size: 0.88rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-large-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 40px rgba(184,151,58,0.3);
+        }
+
+        .btn-large-outline {
+            padding: 16px 50px;
+            background: transparent;
+            color: var(--white);
+            font-size: 0.88rem;
+            letter-spacing: 0.08em;
+            border: 1px solid rgba(255,255,255,0.22);
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .btn-large-outline:hover {
+            border-color: rgba(255,255,255,0.45);
+            background: rgba(255,255,255,0.04);
+        }
+
+        /* ── FOOTER ─────────────────────────────────────── */
+        footer {
+            padding: 36px 60px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.82rem;
+            letter-spacing: 0.18em;
+            color: var(--muted);
+        }
+
+        .footer-copy {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.25);
+            letter-spacing: 0.06em;
+        }
+
+        /* ── SHARED BUTTON ──────────────────────────────── */
+        .btn-hero {
+            padding: 15px 44px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: #000;
+            font-weight: 700;
+            font-size: 0.88rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-hero::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.18), transparent);
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 36px rgba(184,151,58,0.28);
+        }
+
+        .btn-value {
+            margin-top: 0;
+            padding: 15px 44px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: #000;
+            font-weight: 700;
+            font-size: 0.88rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-value:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 36px rgba(184,151,58,0.28);
+        }
+
+        /* ── RESPONSIVE ─────────────────────────────────── */
+        @media (max-width: 960px) {
+            nav { padding: 14px 24px; }
+            .nav-links { display: none; }
+            #value-prop, #cta { padding-left: 24px; padding-right: 24px; }
+            #builder { padding: 60px 24px 80px; }
+            .builder-grid { grid-template-columns: 1fr; }
+            .price-panel { position: static; }
+            footer { padding: 28px 24px; }
+            .stats-row { gap: 16px; }
+            .stat-card { padding: 28px 32px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── CINEMA GATE ────────────────────────────────────────── -->
+<div id="cinema-gate" onclick="enterCinema()">
+    <div class="gate-logo">Executive Partner LLC</div>
+    <div class="gate-enter">
+        <div class="gate-circle">
+            <div class="gate-play"></div>
+        </div>
+        <div class="gate-label">Enter Experience</div>
+    </div>
+    <div class="gate-tagline">"Every great business has a story. Yours starts here."</div>
+</div>
+
+<!-- ── NAVIGATION ────────────────────────────────────────── -->
+<nav>
+    <div class="logo">Executive Partner LLC</div>
+    <ul class="nav-links">
+        <li><a href="#value-prop">Why Us</a></li>
+        <li><a href="#builder">Services</a></li>
+        <li><a href="#cta">Contact</a></li>
+        <li><a href="#builder" class="nav-cta">Build My Team</a></li>
+    </ul>
+</nav>
+
+<!-- ── SECTION 1: CINEMATIC INTRO ────────────────────────── -->
+<section id="intro">
+    <video id="bgVideo" autoplay loop muted playsinline>
+        <source src="background2.mp4" type="video/mp4">
+    </video>
+    <canvas id="cinemaCanvas"></canvas>
+    <div class="intro-bg"></div>
+    <div class="vignette"></div>
+    <div class="grain"></div>
+    <div class="intro-glow"></div>
+
+    <div class="cinematic-text">
+        <p class="in-a-world">"In a world where small business owners wear every hat..."</p>
+        <h1 class="hero-headline">Your Executive Partner<br>for Business Excellence</h1>
+        <p class="hero-sub">
+            We handle Finance, HR, Operations, Sales &amp; more —<br>
+            so you can focus on what you do best.
+        </p>
+        <div class="hero-btn-wrap">
+            <a href="#builder" class="btn-hero">Build My Team &rarr;</a>
+        </div>
+    </div>
+
+    <!-- Speaker toggle -->
+    <div id="speakerBtn" onclick="toggleAudio()" title="Toggle audio">🔊</div>
+
+    <div class="scroll-hint">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+    </div>
+
+    <!-- FILM REEL -->
+    <div class="reel-container">
+        <div class="reel-strip-bg"></div>
+        <div class="reel-scroll" id="reelScroll"></div>
+    </div>
+</section>
+
+<!-- ── SECTION 2: MONEY HOOK ──────────────────────────────── -->
+<section id="value-prop">
+    <div class="value-glow"></div>
+    <span class="section-eyebrow">The Real Cost of Doing It Alone</span>
+    <h2 class="value-headline">
+        Stop spending <span class="gold">$100,000–$300,000</span><br>
+        a year on administrative labor
+    </h2>
+    <p class="value-sub">
+        Our clients reduce their admin costs by 60–80%.
+        No hiring. No training. No turnover. Just a polished executive team — ready now.
+    </p>
+
+    <div class="stats-row">
+        <div class="stat-card">
+            <span class="stat-number">60–80%</span>
+            <span class="stat-label">Cost Reduction</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">6+</span>
+            <span class="stat-label">Departments Covered</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">1</span>
+            <span class="stat-label">Partner. All In.</span>
+        </div>
+    </div>
+
+    <a href="#builder" class="btn-value">See What We Can Do For You</a>
+</section>
+
+<!-- ── SECTION 3: INTERACTIVE SERVICE BUILDER ─────────────── -->
+<section id="builder">
+    <div class="builder-header">
+        <span class="section-eyebrow">Build Your Executive Team</span>
+        <h2 class="section-title">Select What You Need.<br>See What It Costs.</h2>
+        <p class="section-desc">
+            Pick the services that fit your business.
+            Your investment builds live — no hidden fees, no surprises.
+        </p>
+    </div>
+
+    <div class="builder-grid">
+        <!-- LEFT: Service Categories -->
+        <div class="cats" id="catsGrid"></div>
+
+        <!-- RIGHT: Summary Panel -->
+        <div class="price-panel">
+            <h3 class="panel-title">Your Team</h3>
+            <p class="panel-sub">Select services to build your custom executive package.</p>
+            <div class="picked-list" id="pickedList">
+                <div class="empty-msg">No services selected yet.<br>Choose from the left to build your team.</div>
+            </div>
+            <div class="hr"></div>
+            <div class="total-row">
+                <span class="total-lbl">Monthly Total</span>
+                <span class="total-num" id="totalNum">$0</span>
+            </div>
+            <div class="savings-line" id="savingsLine">&nbsp;</div>
+            <button class="btn-gold" onclick="goGetStarted()">Get Started &rarr;</button>
+            <button class="btn-clear" onclick="clearAll()">Clear All</button>
+            <p class="panel-note">
+                * Prices shown are estimates. Final pricing<br>
+                confirmed during onboarding. Cancel anytime.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ── SECTION 4: FINAL CTA ───────────────────────────────── -->
+<section id="cta">
+    <div class="cta-glow"></div>
+    <h2 class="cta-title">Ready to Work <em>On</em><br>Your Business?</h2>
+    <p class="cta-sub">
+        Join the small business owners who stopped doing it all
+        and started leading.
+    </p>
+    <div class="cta-btns">
+        <a href="#builder" class="btn-large-gold">Build My Team</a>
+        <a href="mailto:info@executivepartnerllc.com" class="btn-large-outline">Talk to Us First</a>
+    </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer>
+    <div class="footer-logo">Executive Partner LLC</div>
+    <div class="footer-copy">executivepartnerllc.com &nbsp;·&nbsp; &copy; 2026 Executive Partner LLC. All rights reserved.</div>
+</footer>
+
+<script>
+// ── SERVICE CATALOG ─────────────────────────────────────────
+// Prices are PLACEHOLDERS — Juan assigns final pricing
+const CATALOG = [
+    {
+        id: 'finance', icon: '💰', label: 'Finance',
+        services: [
+            { id: 'f1', name: 'Cash Flow Forecast',    price: 299 },
+            { id: 'f2', name: 'Invoice Collection',    price: 199 },
+            { id: 'f3', name: 'Month-End Close',       price: 399 },
+            { id: 'f4', name: 'Payroll Planning',      price: 249 },
+            { id: 'f5', name: 'Tax Preparation',       price: 349 },
+            { id: 'f6', name: 'Margin Analysis',       price: 199 },
+            { id: 'f7', name: 'Quarterly Review',      price: 299 },
+        ]
+    },
+    {
+        id: 'sales', icon: '📊', label: 'Sales & CRM',
+        services: [
+            { id: 's1', name: 'Lead Triage & Scoring', price: 299 },
+            { id: 's2', name: 'CRM Maintenance',       price: 199 },
+            { id: 's3', name: 'CRM Cleanup',           price: 149 },
+            { id: 's4', name: 'Daily Call List',       price: 199 },
+        ]
+    },
+    {
+        id: 'marketing', icon: '📢', label: 'Marketing',
+        services: [
+            { id: 'm1', name: 'Content Strategy',      price: 299 },
+            { id: 'm2', name: 'Campaign Management',   price: 399 },
+            { id: 'm3', name: 'Sales Brief',           price: 149 },
+        ]
+    },
+    {
+        id: 'operations', icon: '⚙️', label: 'Operations',
+        services: [
+            { id: 'o1', name: 'Business Pulse Reports',price: 149 },
+            { id: 'o2', name: 'Monday Morning Brief',  price:  99 },
+            { id: 'o3', name: 'Friday Wrap Brief',     price:  99 },
+            { id: 'o4', name: 'Customer Pulse Check',  price: 149 },
+        ]
+    },
+    {
+        id: 'hr', icon: '👥', label: 'Human Resources',
+        services: [
+            { id: 'h1', name: 'Job Post Builder',      price: 249 },
+            { id: 'h2', name: 'Interview & Hiring Kit',price: 149 },
+        ]
+    },
+    {
+        id: 'customer', icon: '🎯', label: 'Customer Service',
+        services: [
+            { id: 'c1', name: 'Complaint Handler',     price: 149 },
+            { id: 'c2', name: 'Ticket Deflector',      price: 199 },
+        ]
+    },
+    {
+        id: 'legal', icon: '⚖️', label: 'Legal & Compliance',
+        services: [
+            { id: 'l1', name: 'Contract Review',       price: 299 },
+        ]
+    },
+];
+
+// ── FILM REEL WORKERS ───────────────────────────────────────
+const WORKERS = [
+    { icon: '🧹', label: 'Cleaning Services' },
+    { icon: '🔒', label: 'Security' },
+    { icon: '🔧', label: 'Maintenance' },
+    { icon: '🏗️', label: 'Construction' },
+    { icon: '👔', label: 'Dry Cleaning' },
+    { icon: '🌿', label: 'Landscaping' },
+    { icon: '🚚', label: 'Logistics' },
+    { icon: '🍽️', label: 'Food Service' },
+    { icon: '💈', label: 'Beauty & Spa' },
+    { icon: '🖥️', label: 'IT Services' },
+    { icon: '🏥', label: 'Healthcare' },
+    { icon: '📦', label: 'Retail' },
+    { icon: '🚗', label: 'Auto Services' },
+    { icon: '⚡', label: 'Electrician' },
+    { icon: '🎨', label: 'Creative Studio' },
+];
+
+// Build film reel
+function buildReel() {
+    const reel = document.getElementById('reelScroll');
+    const all = [...WORKERS, ...WORKERS]; // duplicate for seamless loop
+    all.forEach(w => {
+        const f = document.createElement('div');
+        f.className = 'film-frame';
+        f.innerHTML = `<div class="frame-icon">${w.icon}</div><div class="frame-label">${w.label}</div>`;
+        reel.appendChild(f);
+    });
+}
+
+// Build service categories
+function buildCats() {
+    const grid = document.getElementById('catsGrid');
+    CATALOG.forEach(cat => {
+        const card = document.createElement('div');
+        card.className = 'cat-card';
+        card.id = `cat-${cat.id}`;
+        card.innerHTML = `
+            <div class="cat-header" onclick="toggleCat('${cat.id}')">
+                <div class="cat-title-wrap">
+                    <span class="cat-ico">${cat.icon}</span>
+                    <span>${cat.label}</span>
+                </div>
+                <span class="cat-chevron">▼</span>
+            </div>
+            <div class="svc-list" id="svc-${cat.id}">
+                ${cat.services.map(s => `
+                    <div class="svc-item" id="si-${s.id}" onclick="toggleSvc('${s.id}')">
+                        <div class="svc-left">
+                            <div class="svc-check">✓</div>
+                            <span class="svc-name">${s.name}</span>
+                        </div>
+                        <span class="svc-price">$${s.price}/mo</span>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+function toggleCat(id) {
+    document.getElementById(`cat-${id}`).classList.toggle('open');
+}
+
+// ── SELECTION STATE ─────────────────────────────────────────
+const picked = new Set();
+
+function toggleSvc(id) {
+    const el = document.getElementById(`si-${id}`);
+    if (picked.has(id)) {
+        picked.delete(id);
+        el.classList.remove('picked');
+    } else {
+        picked.add(id);
+        el.classList.add('picked');
+    }
+    updatePanel();
+}
+
+function updatePanel() {
+    const list  = document.getElementById('pickedList');
+    const total = document.getElementById('totalNum');
+    const saves = document.getElementById('savingsLine');
+
+    if (picked.size === 0) {
+        list.innerHTML = '<div class="empty-msg">No services selected yet.<br>Choose from the left to build your team.</div>';
+        total.textContent = '$0';
+        saves.innerHTML = '&nbsp;';
+        return;
+    }
+
+    let sum = 0;
+    let rows = '';
+    CATALOG.forEach(cat => {
+        cat.services.forEach(s => {
+            if (picked.has(s.id)) {
+                sum += s.price;
+                rows += `<div class="picked-row">
+                    <span class="pname">${s.name}</span>
+                    <span class="pprice">$${s.price}/mo</span>
+                </div>`;
+            }
+        });
+    });
+
+    list.innerHTML = rows;
+    total.textContent = `$${sum.toLocaleString()}/mo`;
+
+    // Savings comparison (vs $150K/yr average admin cost)
+    const annualEPL  = sum * 12;
+    const annualSaved = 150000 - annualEPL;
+    if (annualSaved > 0) {
+        saves.textContent = `Est. savings: ~$${annualSaved.toLocaleString()}/yr vs. traditional hiring`;
+    } else {
+        saves.innerHTML = '&nbsp;';
+    }
+}
+
+function clearAll() {
+    picked.clear();
+    document.querySelectorAll('.svc-item.picked').forEach(el => el.classList.remove('picked'));
+    updatePanel();
+}
+
+function goGetStarted() {
+    if (picked.size === 0) {
+        alert('Please select at least one service to get started.');
+        return;
+    }
+    document.getElementById('cta').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ── CINEMATIC CANVAS BACKGROUND ─────────────────────────────
+const canvas = document.getElementById('cinemaCanvas');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+// Bokeh particles
+const PALETTE = [
+    'rgba(184,151,58,',   // gold
+    'rgba(210,180,100,',  // warm gold
+    'rgba(255,220,120,',  // light amber
+    'rgba(255,255,220,',  // warm white
+    'rgba(200,200,255,',  // cool blue-white
+    'rgba(255,200,150,',  // orange-amber
+];
+
+function randBetween(a, b) { return a + Math.random() * (b - a); }
+
+class Bokeh {
+    constructor() { this.reset(true); }
+    reset(init) {
+        this.x     = randBetween(0, canvas.width);
+        this.y     = init ? randBetween(0, canvas.height) : canvas.height + 80;
+        this.r     = randBetween(30, 160);
+        this.alpha = randBetween(0.04, 0.18);
+        this.speed = randBetween(0.08, 0.35);
+        this.drift = randBetween(-0.12, 0.12);
+        this.color = PALETTE[Math.floor(Math.random() * PALETTE.length)];
+        this.life  = 0;
+        this.maxLife = randBetween(300, 900);
+    }
+    update() {
+        this.y -= this.speed;
+        this.x += this.drift;
+        this.life++;
+        if (this.y + this.r < 0 || this.life > this.maxLife) this.reset(false);
+    }
+    draw() {
+        const fade = Math.min(this.life / 60, 1) * Math.min((this.maxLife - this.life) / 60, 1);
+        const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r);
+        grad.addColorStop(0,   this.color + (this.alpha * fade).toFixed(3) + ')');
+        grad.addColorStop(0.5, this.color + (this.alpha * 0.4 * fade).toFixed(3) + ')');
+        grad.addColorStop(1,   this.color + '0)');
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+    }
+}
+
+// Light rays
+class LightRay {
+    constructor() { this.reset(); }
+    reset() {
+        this.x      = randBetween(-200, canvas.width + 200);
+        this.width  = randBetween(40, 140);
+        this.alpha  = randBetween(0.012, 0.055);
+        this.speed  = randBetween(0.03, 0.09);
+        this.angle  = randBetween(-0.25, 0.25);
+        this.life   = 0;
+        this.maxLife = randBetween(400, 1200);
+    }
+    update() {
+        this.x += this.speed;
+        this.life++;
+        if (this.x > canvas.width + 300 || this.life > this.maxLife) this.reset();
+    }
+    draw() {
+        const fade = Math.min(this.life / 100, 1) * Math.min((this.maxLife - this.life) / 100, 1);
+        ctx.save();
+        ctx.translate(this.x, 0);
+        ctx.rotate(this.angle);
+        const grad = ctx.createLinearGradient(-this.width/2, 0, this.width/2, 0);
+        grad.addColorStop(0,   'rgba(184,151,58,0)');
+        grad.addColorStop(0.5, 'rgba(184,151,58,' + (this.alpha * fade).toFixed(3) + ')');
+        grad.addColorStop(1,   'rgba(184,151,58,0)');
+        ctx.fillStyle = grad;
+        ctx.fillRect(-this.width/2, -50, this.width, canvas.height + 100);
+        ctx.restore();
+    }
+}
+
+// Star/sparkle particles
+class Sparkle {
+    constructor() { this.reset(true); }
+    reset(init) {
+        this.x     = randBetween(0, canvas.width);
+        this.y     = init ? randBetween(0, canvas.height) : Math.random() * canvas.height;
+        this.size  = randBetween(0.5, 2.2);
+        this.alpha = randBetween(0.1, 0.6);
+        this.speed = randBetween(0, 0.004);
+        this.phase = Math.random() * Math.PI * 2;
+    }
+    update() {
+        this.phase += this.speed + 0.006;
+    }
+    draw() {
+        const a = this.alpha * (0.5 + 0.5 * Math.sin(this.phase));
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,240,180,${a})`;
+        ctx.fill();
+    }
+}
+
+// Initialize particles
+const bokehArr    = Array.from({length: 28}, () => new Bokeh());
+const rayArr      = Array.from({length: 5},  () => new LightRay());
+const sparkleArr  = Array.from({length: 90}, () => new Sparkle());
+
+let canvasRunning = false;
+
+function animateCanvas() {
+    if (!canvasRunning) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Canvas is transparent — video shows through, we only draw bokeh/sparkles on top
+    rayArr.forEach(r => { r.update(); r.draw(); });
+    bokehArr.forEach(b => { b.update(); b.draw(); });
+    sparkleArr.forEach(s => { s.update(); s.draw(); });
+
+    requestAnimationFrame(animateCanvas);
+}
+
+
+// ── ENTER CINEMA ─────────────────────────────────────────────
+function enterCinema() {
+    const gate = document.getElementById('cinema-gate');
+    gate.classList.add('fade-out');
+
+    // Unmute and ensure video is playing
+    const vid = document.getElementById('bgVideo');
+    if (vid) {
+        vid.muted = false;
+        vid.volume = 0.55;
+        vid.play().catch(() => { vid.muted = true; vid.play(); });
+    }
+
+    // Start canvas bokeh overlay
+    canvasRunning = true;
+    animateCanvas();
+
+
+    // Remove gate from DOM after fade
+    setTimeout(() => gate.remove(), 2000);
+}
+
+// ── SPEAKER TOGGLE ──────────────────────────────────────────
+function toggleAudio() {
+    const vid = document.getElementById('bgVideo');
+    const btn = document.getElementById('speakerBtn');
+    if (!vid) return;
+    vid.muted = !vid.muted;
+    btn.textContent = vid.muted ? '🔇' : '🔊';
+}
+
+// ── INIT ────────────────────────────────────────────────────
+buildReel();
+buildCats();
+</script>
+</body>
+</html>
