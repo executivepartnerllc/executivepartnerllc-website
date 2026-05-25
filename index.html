@@ -22,6 +22,10 @@
             justify-content: center;
             cursor: pointer;
             transition: opacity 1.4s ease;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         #cinema-gate.fade-out {
@@ -1043,7 +1047,7 @@
 <body>
 
 <!-- ── CINEMA GATE ────────────────────────────────────────── -->
-<div id="cinema-gate" onclick="enterCinema()" ontouchstart="enterCinema()">
+<div id="cinema-gate">
     <div class="gate-logo">Executive Partner LLC</div>
     <div class="gate-enter">
         <div class="gate-circle">
@@ -1521,21 +1525,70 @@ function animateCanvas() {
 
 // ── ENTER CINEMA ─────────────────────────────────────────────
 let cinemaEntered = false;
+
 function enterCinema() {
-    if (cinemaEntered) return;   // prevent double-fire on touch devices
+    if (cinemaEntered) return;
     cinemaEntered = true;
 
-    const gate = document.getElementById('cinema-gate');
-    gate.classList.add('fade-out');
+    try {
+        const gate = document.getElementById('cinema-gate');
+        if (gate) gate.classList.add('fade-out');
 
-    // Unmute and play — wrapped in try/catch (iOS Safari blocks volume changes)
-    const vid = document.getElementById('bgVideo');
-    if (vid) {
-        try { vid.muted = false; } catch(e) {}
-        vid.play().catch(() => {
-            try { vid.muted = true; } catch(e) {}
-            vid.play().catch(() => {});
-        });
+        // Unmute and play — wrapped in try/catch (iOS Safari blocks volume changes)
+        const vid = document.getElementById('bgVideo');
+        if (vid) {
+            try { vid.muted = false; } catch(e) {}
+            vid.play().catch(() => {
+                try { vid.muted = true; } catch(e) {}
+                vid.play().catch(() => {});
+            });
+        }
+
+        // Start canvas bokeh overlay
+        canvasRunning = true;
+        animateCanvas();
+
+        // Remove gate from DOM after fade
+        setTimeout(() => {
+            const g = document.getElementById('cinema-gate');
+            if (g && g.parentNode) g.remove();
+        }, 2000);
+
+    } catch(err) {
+        // Safety fallback — if anything throws, still remove the gate
+        const gate = document.getElementById('cinema-gate');
+        if (gate && gate.parentNode) gate.remove();
     }
+}
 
-    
+// Attach gate events — addEventListener is more reliable than inline handlers
+// touchend + preventDefault stops iOS from generating a ghost click after touch
+(function attachGate() {
+    const gate = document.getElementById('cinema-gate');
+    if (!gate) return;
+
+    gate.addEventListener('touchend', function(e) {
+        e.preventDefault();  // stops the 300ms ghost click on iOS Safari
+        enterCinema();
+    }, { passive: false });
+
+    gate.addEventListener('click', function() {
+        enterCinema();       // desktop fallback
+    });
+}());
+
+// ── SPEAKER TOGGLE ──────────────────────────────────────────
+function toggleAudio() {
+    const vid = document.getElementById('bgVideo');
+    const btn = document.getElementById('speakerBtn');
+    if (!vid) return;
+    vid.muted = !vid.muted;
+    btn.textContent = vid.muted ? '🔇' : '🔊';
+}
+
+// ── INIT ────────────────────────────────────────────────────
+buildReel();
+buildCats();
+</script>
+</body>
+</html>
